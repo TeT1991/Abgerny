@@ -9,7 +9,6 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private GameAnalytics _analytics;
 
     [SerializeField] private Character[] _characters;
-    [SerializeField] private LanguageButton[] _languageButtons;
 
     private Localizator _localizator;
 
@@ -36,14 +35,6 @@ public class Bootstrap : MonoBehaviour
 
         _localizator = FindAnyObjectByType<Localizator>();
 
-        if (_localizator != null)
-        {
-
-            foreach (var button in _languageButtons)
-            {
-                button.OnClick += _localizator.SwitchLanguage;
-            }
-        }
     }
 
     private void UnSubscribe()
@@ -54,14 +45,6 @@ public class Bootstrap : MonoBehaviour
         foreach (var character in _characters)
         {
             character.Activated -= _analytics.CountButtonUse;
-        }
-
-        if( _localizator != null )
-        {
-            foreach (var button in _languageButtons)
-            {
-                button.OnClick -= _localizator.SwitchLanguage;
-            }
         }
     }
 
